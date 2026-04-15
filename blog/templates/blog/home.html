@@ -1,0 +1,17 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django Blog</title>
+</head>
+<body>
+    <h1>Welcome, {{ name }}!</h1>
+
+    <h2>My Posts:</h2>
+    {% for post in posts %}
+        <p>{{ post }}</p>
+    {% endfor %}
+</body>
+</html>
