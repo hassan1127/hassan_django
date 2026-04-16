@@ -1,5 +1,5 @@
 
-
+<!-- Django -->
 
 <!DOCTYPE html>
 <html>
@@ -7,13 +7,27 @@
     <title>My Django Blog</title>
 </head>
 <body>
+    <nav>
+        {% if request.user.is_authenticated %}
+            <span>Welcome, {{ request.user.username }}!</span>
+            <form method="POST" action="{% url 'logout' %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            <a href="{% url 'create_post' %}">+ Create New Post</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </nav>
+    <hr>
     <h1>My Blog</h1>
-
     {% for post in posts %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
-        <small>{{ post.date }}</small>
+        <small>{{ post.date|date:"F j, Y, g:i a" }}</small>
         <hr>
     {% endfor %}
 </body>
 </html>
+
+
